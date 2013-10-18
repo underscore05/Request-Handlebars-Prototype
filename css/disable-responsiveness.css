@@ -1,0 +1,12 @@
+/**
+ * Disable bootstrap responsiveness by setting *All Media Queries Breakpoint to 0px 
+ * and setting .container to none and defining a fix width
+ * Fix Navbar stacking by setting @grid-float-breakpoint to 1px 
+ * Changes made in Bootstrap 3 customizer, 
+ *      set @grid-gutter-width to 16px
+ *      set @navbar-height to 40px
+ */
+.container {
+  max-width: none !important;
+  width: 1170px;
+}

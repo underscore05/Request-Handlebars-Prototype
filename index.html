@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>API Consumer Prototype</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="css/disable-responsiveness.css" />
+    <style type="text/css">
+        textarea.no-resize { resize:none; }
+    </style>
+</head>
+<body>
+    
+    <div class="container" style="padding-top:20px;">
+        
+        <button class="btn btn-default showPassengerForm">Show Passenger Form</button>
+        <button class="btn btn-default showAddressForm">Show Address Form</button>
+        <button class="btn btn-default showRecentAddresses">Show Recent Addresses</button>
+        <hr />
+        <div class="col-xs-3">
+            <div id="passengerContainer"></div>
+            <div id="recentAddressesContainer"></div>
+        </div>
+        <div class="col-xs-5">
+            <div id="addressContainer"></div>            
+            
+        </div>
+        <div class="col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Expected Route</div>
+                <div class="panel-body">
+                    <div class="well" style="height:200px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="js/mootools-core-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/mootools-more-1.4.0.1.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-1.0.0.beta.6.js"></script>
+    <script type="text/javascript" src="js/request.hbtemplate.js"></script>
+    <script type="text/javascript">
+        Request.JSON = Class.refactor(Request.JSON, {
+            initialize: function(options){
+        		this.previous(options);
+        		this.headers = {};
+        	}
+        });
+        
+        var frmPassenger = new Request.HbTemplate({url:"templates/passenger-profile.html", update: $('passengerContainer')});
+        var frmAddress = new Request.HbTemplate({url:"templates/address-profile.html", update: $('addressContainer')});        
+        var lstRecentAddresses = new Request.HbTemplate({url:"templates/address-list.html", update: $('recentAddressesContainer')});
+            lstRecentAddresses.addEvent('success', function(html) {
+               
+            });
+        
+        var reqAddress = new Request.JSON({ 
+            method: 'GET',            
+            onSuccess: function(json) {
+                frmAddress.options.viewData = json;
+                frmAddress.send();
+            }
+        });
+        
+        
+        $('recentAddressesContainer').addEvent('click:relay(.addressData)', function() {
+           var url = this.get('data-url');
+           reqAddress.options.url = url;
+           reqAddress.send();
+        });
+        
+        var requestAddresses = new Request.JSON({ 
+            method: 'GET',
+            url: "http://api.dispatch/passengers/1/addresses",
+            onSuccess: function(json) {
+                lstRecentAddresses.options.viewData = json;
+                lstRecentAddresses.send();
+            }
+        });
+        
+        
+        //Remove headers since it triggers a all to OPTIONS verb
+        //requestAddress.headers = {};
+            
+        document.body.addEvent('click:relay(.showPassengerForm)', function() {
+            frmPassenger.send();
+        });
+        document.body.addEvent('click:relay(.showAddressForm)', function() {
+            frmAddress.send();
+        });
+        document.body.addEvent('click:relay(.showRecentAddresses)', function() {
+            requestAddresses.send();            
+        });
+    </script>
+</body>
+</html>

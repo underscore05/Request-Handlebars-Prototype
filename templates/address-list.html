@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Recent Address</div>
+    <div class="list-group">
+        {{#each addresses}}
+            <a href="javascript:void(0)" class="list-group-item addressData" data-url="{{uri}}">
+                <span class="glyphicon glyphicon-map-marker"></span>
+                <span class="">{{orig}}</span> 
+                <span class="glyphicon glyphicon-flag"></span>
+                <span class="">{{dest}}</span>
+            </a>
+        {{/each}}
+    </div>
+</div>

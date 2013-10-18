@@ -1,0 +1,68 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-star"></span>
+        Booking</div>
+    <div class="panel-body">
+        <form action="" class="form-horizontal" role="form">
+            <div class="hidden">                
+                <input type="hidden" name="Job[passenger_id]" value="" />
+            </div>
+            <div class="form-group">
+                <label for="addressOrig" class="col-xs-12">
+                    <span class="glyphicon glyphicon-map-marker"></span>
+                    Pickup Location</label>
+                <div class="col-xs-12">
+                    <input type="text" name="Job[orig]" id="addressOrig" class="form-control no-resize" value="{{address.orig}}" />
+                </div>
+            </div>            
+            <div class="form-group">
+                <label for="addressDest" class="col-xs-12">
+                    <span class="glyphicon glyphicon-flag"></span>
+                    Destination</label>                
+                <div class="col-xs-12">
+                    <input type="text" name="Job[dest]" id="addressDest" class="form-control no-resize" value="{{address.dest}}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4">
+                    <label for="addressDest">
+                        <span class="glyphicon glyphicon-briefcase"></span>
+                        Luggage</label>
+                    <input type="text" name="Job[dest]" id="addressDest" class="form-control" value="" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="addressDest">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Passengers</label>
+                    <input type="text" name="Job[dest]" id="addressDest" class="form-control" value="" />
+                </div>
+                <div class="col-xs-4">
+                    <label for="addressDest">
+                        <span class="glyphicon glyphicon-flash"></span>
+                        Proximity</label>
+                    <input type="text" name="Job[proximity]" id="addressDest" class="form-control no-resize" value="" />
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <label for="addressDest"><span class="glyphicon glyphicon-pushpin"></span> More Details</label>                
+                </div>
+                <div class="col-xs-12">
+                    <textarea name="Address[dest]" id="addressDest" class="form-control no-resize"></textarea>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-bullhorn"></span>
+                        Dispatch                        
+                    </button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>
